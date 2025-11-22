@@ -3,15 +3,17 @@
 #############################################
 FROM eclipse-temurin:17-jdk AS builder
 
-# Work directory
 WORKDIR /app
 
-# Gradle wrapper 및 build config만 먼저 복사하여 캐시 최적화
+# Gradle wrapper 및 build config 복사
 COPY gradlew gradlew.bat ./
 COPY gradle gradle
 COPY build.gradle settings.gradle ./
 
-# 의존성 캐시용 — src 빼고 먼저 수행
+# 🔥 gradlew 실행 권한 부여 (필수!)
+RUN chmod +x gradlew
+
+# 의존성 캐시 레이어
 RUN ./gradlew dependencies --no-daemon || true
 
 # 실제 소스 복사
@@ -19,7 +21,6 @@ COPY src src
 
 # Boot JAR 빌드
 RUN ./gradlew bootJar --no-daemon
-
 
 #############################################
 # 2️⃣ Runtime Stage  (JRE 17)
