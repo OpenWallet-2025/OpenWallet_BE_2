@@ -103,10 +103,12 @@ jobs:
           ref: ${{ steps.branch.outputs.branch }} # push한 브랜치와 동일한 이름의 브랜치로 checkout
     
       - name: Update Image Tag
-        run: |
-          NEW_TAG="${GITHUB_SHA}"
-          # 'repository:' 라인 근처에서 'tag:'를 찾도록 범위를 제한합니다.
-          sed -i '/repository:[[:space:]]*ghcr\.io\/openwallet-2025\/backend/{n;s/^[[:space:]]*tag:.*/    tag: "'"${NEW_TAG}"'"/}' apps/backend/values.yaml
+        uses: mikefarah/yq@master
+        with:
+          # 변경할 명령어: backend.image.tag 값을 현재 커밋 해시($GITHUB_SHA)로 변경
+          cmd: yq -i '.backend.image.tag = strenv(GITHUB_SHA)' apps/backend/values.yaml
+        env:
+          GITHUB_SHA: ${{ github.sha }}
     
       - name: Commit & Push
         run: |
