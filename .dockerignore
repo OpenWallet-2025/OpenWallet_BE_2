@@ -1,0 +1,18 @@
+# .dockerignore
+
+# 1. 빌드 결과물 및 캐시 폴더 무시 (여기에 뚱뚱한 jar가 들어있음)
+.gradle
+build
+out
+
+# 2. IDE 설정 파일 무시
+.idea
+*.iml
+
+# 3. 기타 불필요한 파일
+.git
+.gitignore
+
+# 주의: *.jar를 넣지 마세요! 
+# 위에서 'build' 폴더를 막았기 때문에, 결과물 jar는 어차피 안 들어갑니다.
+# 반면, gradle-wrapper.jar는 'gradle/wrapper/' 폴더에 있으므로 정상적으로 복사됩니다.
