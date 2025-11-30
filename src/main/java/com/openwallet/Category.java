@@ -8,5 +8,6 @@ public enum Category {
     CULTURE,       // 취미,문화생활
     EDUCATION,     // 교육,자기계발
     CLOTHING,      // 의류
+    SUBSCRIPTION,  // 구독(정기 결제)
     ETC            // 기타
 }
