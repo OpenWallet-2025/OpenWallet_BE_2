@@ -3,13 +3,16 @@ package com.openwallet.service;
 import com.openwallet.Category;
 import com.openwallet.Emotion;
 import com.openwallet.domain.Expense;
+import com.openwallet.domain.Subscription;
 import com.openwallet.dto.ExpenseRequest;
 import com.openwallet.dto.ExpenseResponse;
 import com.openwallet.dto.ExpenseUpdateRequest;
 import com.openwallet.repository.ExpenseRepository;
+import com.openwallet.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,9 +24,25 @@ import java.util.UUID;
 public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
+    @Transactional
     public ExpenseResponse save(ExpenseRequest request) {
         Expense saved = expenseRepository.save(request.toEntity());
+
+        if (Category.valueOf(request.getCategory()) == Category.SUBSCRIPTION) {
+            Subscription subscription = Subscription.builder()
+                    .title(request.getTitle())
+                    .price(request.getPrice())
+                    .category(Category.SUBSCRIPTION)
+                    .nextPaymentDate(request.getDate().plusMonths(1)) // 다음 결제일
+                    .memo(request.getMemo())
+                    .emotion(Emotion.valueOf((request.getEmotion())))
+                    .satisfaction(request.getSatisfaction())
+                    .build();
+
+            subscriptionRepository.save(subscription);
+        }
 
         return new ExpenseResponse(saved);
     }
