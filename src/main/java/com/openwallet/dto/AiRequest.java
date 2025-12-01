@@ -27,74 +27,6 @@ public class AiRequest {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class TotalSpend {
-
-        @JsonProperty("user_id")
-        private String userId;
-
-        @JsonProperty("start_date")
-        private String startDate; // YYYY-MM-DD
-
-        @JsonProperty("end_date")
-        private String endDate;   // YYYY-MM-DD
-
-        // 선택 항목 (필수가 아님, Null일 수 있음)
-        @JsonProperty("category_ids")
-        private List<Integer> categoryIds; // int[] -> List<Integer>
-
-        @JsonProperty("merchant_ids")
-        private List<Integer> merchantIds; // int[] -> List<Integer>
-    }
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class TopMerchants {
-
-        @JsonProperty("user_id")
-        private String userId;
-
-        @JsonProperty("start_date")
-        private String startDate;
-
-        @JsonProperty("end_date")
-        private String endDate;
-
-        // 선택 항목 (기본값 5)
-        // int 대신 Integer를 쓰면 값이 없을 때 null로 보내져서
-        // FastAPI의 기본값(default=5)이 적용되도록 할 수 있음
-        @JsonProperty("limit")
-        private Integer limit;
-
-        // 카테고리 필터 (선택)
-        @JsonProperty("category_ids")
-        private List<Integer> categoryIds;
-    }
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Trend {
-
-        @JsonProperty("user_id")
-        private String userId;
-
-        // "monthly" 또는 "weekly" (기본값 monthly)
-        // 값이 없으면 null로 보내서 서버 기본값 사용
-        @JsonProperty("period")
-        private String period;
-
-        // 조회 기간 (기본 6)
-        @JsonProperty("months")
-        private Integer months;
-
-        // 카테고리 필터
-        @JsonProperty("category_ids")
-        private List<Integer> categoryIds;
-    }
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
     public static class Summary {
 
         // 검색 키워드 리스트 (필수)
@@ -119,9 +51,6 @@ public class AiRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Report {
-
-        @JsonProperty("user_id")
-        private String userId;
 
         @JsonProperty("start_date")
         private String startDate; // YYYY-MM-DD

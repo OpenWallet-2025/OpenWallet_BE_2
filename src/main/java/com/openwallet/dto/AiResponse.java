@@ -40,9 +40,6 @@ public class AiResponse {
 
     }
 
-
-
-
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -50,70 +47,6 @@ public class AiResponse {
         private String detail;
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class TotalSpend {
-
-        // 명세서엔 int지만, 금액은 범위가 커질 수 있어 Long 권장
-        private Long total;
-
-        private String currency; // "KRW"
-    }
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class TopMerchants {
-
-        // JSON의 "top_merchants" 키와 매핑되는 리스트
-        @JsonProperty("top_merchants")
-        private List<MerchantSummary> topMerchants;
-
-        // "currency": "KRW"
-        private String currency;
-
-        // 리스트 내부의 개별 가맹점 정보 (Inner Class)
-        @Data
-        @NoArgsConstructor
-        @AllArgsConstructor
-        public static class MerchantSummary {
-
-            @JsonProperty("merchant_id")
-            private Long merchantId;
-
-            @JsonProperty("merchant_name")
-            private String merchantName;
-
-            private Long amount;
-        }
-    }
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Trend {
-
-        // 응답 JSON: { "series": [ {..}, {..} ] }
-        @JsonProperty("series")
-        private List<TrendPoint> series;
-
-
-        private String currency;
-
-        // 리스트 내부의 개별 데이터 포인트 (TrendPoint)
-        @Data
-        @NoArgsConstructor
-        @AllArgsConstructor
-        public static class TrendPoint {
-
-            // "2025-06" 또는 "2025-W23"
-            private String period;
-
-            // 해당 기간 지출액 (돈은 Long 권장)
-            private Long amount;
-        }
-    }
 
     @Data
     @NoArgsConstructor
@@ -149,9 +82,6 @@ public class AiResponse {
 
         // AI가 생성한 핵심 결과물 (긴 텍스트)
         private String report;
-
-        @JsonProperty("user_id")
-        private String userId;
 
         @JsonProperty("start_date")
         private String startDate;

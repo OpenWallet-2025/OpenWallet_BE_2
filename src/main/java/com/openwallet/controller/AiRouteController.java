@@ -28,33 +28,6 @@ public class AiRouteController {
     }
 
     // ==================================================================
-    // 2. 총 지출 통계 조회
-    // ==================================================================
-    @PostMapping("/stats/total-spend")
-    public ResponseEntity<AiResponse.TotalSpend> getTotalSpend(@RequestBody AiRequest.TotalSpend request) {
-        log.info("API Request: Total Spend Analysis - User: {}", request.getUserId());
-        return ResponseEntity.ok(aiService.getTotalSpend(request));
-    }
-
-    // ==================================================================
-    // 3. 상위 가맹점 분석
-    // ==================================================================
-    @PostMapping("/stats/top-merchants")
-    public ResponseEntity<AiResponse.TopMerchants> getTopMerchants(@RequestBody AiRequest.TopMerchants request) {
-        log.info("API Request: Top Merchants Analysis - User: {}", request.getUserId());
-        return ResponseEntity.ok(aiService.getTopMerchants(request));
-    }
-
-    // ==================================================================
-    // 4. 소비 트렌드 분석
-    // ==================================================================
-    @PostMapping("/stats/trend")
-    public ResponseEntity<AiResponse.Trend> getTrend(@RequestBody AiRequest.Trend request) {
-        log.info("API Request: Trend Analysis - User: {}", request.getUserId());
-        return ResponseEntity.ok(aiService.getTrend(request));
-    }
-
-    // ==================================================================
     // 5. 트렌드 뉴스 요약
     // ==================================================================
     @PostMapping("/trends/summary")

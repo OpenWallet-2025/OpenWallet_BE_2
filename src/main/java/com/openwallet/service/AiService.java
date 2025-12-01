@@ -35,36 +35,6 @@ public class AiService {
         );
     }
 
-
-    public AiResponse.TotalSpend getTotalSpend(AiRequest.TotalSpend request) {
-        return postToAiServer(
-                "/stats/total-spend",
-                request,
-                MediaType.APPLICATION_JSON,
-                AiResponse.TotalSpend.class
-        );
-    }
-
-
-    public AiResponse.TopMerchants getTopMerchants(AiRequest.TopMerchants request) {
-        return postToAiServer(
-                "/stats/top-merchants",
-                request,
-                MediaType.APPLICATION_JSON,
-                AiResponse.TopMerchants.class // <--- 수정됨
-        );
-    }
-
-
-    public AiResponse.Trend getTrend(AiRequest.Trend request) {
-        return postToAiServer(
-                "/stats/trend",
-                request,
-                MediaType.APPLICATION_JSON,
-                AiResponse.Trend.class
-        );
-    }
-
     public AiResponse.Summary getTrendSummary(AiRequest.Summary request) {
         return postToAiServer(
                 "/trends/summary",
