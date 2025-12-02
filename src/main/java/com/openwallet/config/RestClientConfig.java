@@ -17,7 +17,7 @@ public class RestClientConfig {
     public RestClient aiRestClient(RestClient.Builder builder) {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(5000);
-        factory.setReadTimeout(30000); // AI는 오래 걸리니까 30초
+        factory.setReadTimeout(600000); // AI는 오래 걸리니까 30초
 
         return builder
                 .baseUrl(aiServerUrl)
